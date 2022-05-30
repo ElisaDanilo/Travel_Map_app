@@ -10,7 +10,7 @@ const PinSchema = new mongoose.Schema({
         require: true,
         min: 3,
     },
-    desc: {
+    review: {
         type: String,
         require,
         min: 3,

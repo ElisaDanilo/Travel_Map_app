@@ -1,11 +1,10 @@
-import React from 'react'
 import "./css/login.css"
 import { useState, useRef } from 'react';
-import axios from 'react';
+import axios from 'axios';
 import RoomIcon from '@mui/icons-material/Room';
 import CancelIcon from '@mui/icons-material/Cancel';
 
-const Login = ({setShowLogin}) => {
+const Login = ({setShowLogin, setCurrentUser}) => {
     const [fail, setFail] = useState(false);
     const nameRef = useRef();
     const passwordRef = useRef();
@@ -17,26 +16,27 @@ const Login = ({setShowLogin}) => {
             password: passwordRef.current.value,
         };
     try{
-        await axios.post("/users/login", user)
-        setFail(false)
+        const res = await axios.post("http://localhost:8800/api/users/login", user)
+        setCurrentUser(res.data.username);
+        setShowLogin(false)
     } catch (err) {
         setFail(true)
     }
     };
 return ( 
-<div className='Login'>
-        <div className='Login_logo'>
+<div className='login_content'>
+        <div className='login_logo'>
             <RoomIcon />
-            ElisaPin</div>
-    <form className='Login_form'onSubmit={handleSubmit}>
-        <input type="text" placeholder='username' ref={nameRef}/>
+            My Travel Pin</div>
+    <form className='login_form'onSubmit={handleSubmit}>
+        <input autoFocus type="text" placeholder='username' ref={nameRef}/>
         <input type="password" placeholder='password' ref={passwordRef}/>
-        <button className='Login_button'>Login</button>
+        <button className='login_button' type="submit">Login</button>
         { fail && ( 
-        <span className='Login_msg_fail'>username or password incorrect</span>
+        <span className='login_msg_fail'>username or password incorrect</span>
         )}
     </form>
-    <CancelIcon className='Login_cancel' onClick={()=>setShowLogin(false)}/>
+    <CancelIcon className='login_cancel' onClick={()=>setShowLogin(false)}/>
 </div>
   )
 }

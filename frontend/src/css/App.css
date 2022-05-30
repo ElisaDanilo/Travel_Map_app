@@ -48,9 +48,10 @@ input::placeholder, textarea::placeholder{
     border-radius: 5px;
     color: white;
     border-color: red ;
+    cursor: pointer;
 }
 
-.button {
+.map_logout .map_login .map_register {
     border: none;
     padding: 5px;
     border-radius: 5px;
@@ -58,21 +59,27 @@ input::placeholder, textarea::placeholder{
     cursor: pointer;
 }
 
-.logout {
+.map_logout {
     background-color: red;
 }
 
-.login{
+.map_login{
     background-color: teal;
     margin-right: 10px;
 }
 
-.register {
+.map_register {
     border-color: slateblue;
 }
 
-.buttons .logout {
+.map_buttons .map_logout {
     position: absolute;
     top: 10px;
     right: 10px;
+}
+
+h1 {
+    position: absolute;
+    color: red;
+    z-index: 0;
 }

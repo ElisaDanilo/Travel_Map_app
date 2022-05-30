@@ -1,7 +1,6 @@
-import React from 'react'
 import "./css/register.css"
 import { useState, useRef } from 'react';
-import axios from 'react';
+import axios from 'axios';
 import RoomIcon from '@mui/icons-material/Room';
 import CancelIcon from '@mui/icons-material/Cancel';
 
@@ -20,23 +19,23 @@ const Register = ({setShowRegister}) => {
             password: passwordRef.current.value,
         };
     try{
-        await axios.post("/users/register", newUser)
-        setSuccess(true);
+        await axios.post("http://localhost:8800/api/users/register", newUser)
         setFail(false)
+        setSuccess(true);
     } catch (err) {
         setFail(true)
     }
     };
 return ( 
-<div className='register'>
+<div className='register_content'>
         <div className='register_logo'>
             <RoomIcon />
-            ElisaPin</div>
+            My Travel Pin</div>
     <form className='register_form'onSubmit={handleSubmit}>
-        <input type="text" placeholder='username' ref={nameRef}/>
+        <input autoFocus type="text" placeholder='username' ref={nameRef}/>
         <input type="email" placeholder='email' ref={emailRef}/>
         <input type="password" placeholder='password' ref={passwordRef}/>
-        <button className='register_button'>Register</button>
+        <button className='register_button' type= "submit" >Register</button>
         { success && (
         <span className='register_msg_success'>Successfull ! You can login now </span>
         )}
